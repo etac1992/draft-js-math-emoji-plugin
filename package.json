@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/draft-js-plugins/draft-js-plugins.git"
+    "url": "https://github.com/etac1992/draft-js-emoji-plugin.git"
   },
   "main": "lib/index.js",
   "keywords": [
