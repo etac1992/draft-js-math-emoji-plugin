@@ -5,6 +5,7 @@ node_modules
 
 # sources
 /src/
+/scripts/
 webpack.config.js
 .babelrc
 .gitignore
