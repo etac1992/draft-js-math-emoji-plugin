@@ -1,31 +1,57 @@
 /* Idea from https://github.com/tommoor/emojione-picker */
 export default function createEmojisFromStrategy(strategy) {
-  const emojis = {};
+  const emojis = {
+    greek: {
+      Alpha: "A",
+      Beta: "B",
+      Gamma: "\\Gamma",
+      Delta: "\\Delta",
+      Epsilon: "E",
+      Zeta: "Z",
+      Eta: "H",
+      Theta: "\\Theta",
+      Iota: "I",
+      Kappa: "K",
+      Lambda: "\\Lambda",
+      Mu: "M",
+      Nu: "N",
+      Xi: "\\Xi",
+      Omicron: "O",
+      Pi: "\\Pi",
+      Rho: "P",
+      Sigma: "\\Sigma",
+      Tau: "T",
+      Upsilon: "\\Upsilon",
+      Phi: "\\Phi",
+      Chi: "X",
+      Psi: "\\Psi",
+      Omega: "\\Omega",
 
-  // categorise and nest emoji
-  // sort ensures that modifiers appear unmodified keys
-  const keys = Object.keys(strategy);
-  keys.forEach((key) => {
-    const value = strategy[key];
-
-    // skip unknown categories
-    if (value.category !== 'modifier') {
-      if (!emojis[value.category]) emojis[value.category] = {};
-      const match = key.match(/(.*?)_tone(.*?)$/);
-
-      if (match) {
-        // this check is to stop the plugin from failing in the case that the
-        // emoji strategy miscategorizes tones - which was the case here:
-        // https://github.com/Ranks/emojione/pull/330
-        const unmodifiedEmojiExists = !!emojis[value.category][match[1]];
-        if (unmodifiedEmojiExists) {
-          emojis[value.category][match[1]][match[2]] = value.shortname;
-        }
-      } else {
-        emojis[value.category][key] = [value.shortname];
-      }
+      alpha: "\\alpha",
+      beta: "\\beta",
+      gamma: "\\gamma",
+      delta: "\\delta",
+      epsilon: "\\epsilon",
+      zeta: "\\zeta",
+      eta: "\\eta",
+      theta: "\\theta",
+      iota: "\\iota",
+      kappa: "\\kappa",
+      lambda: "\\lambda",
+      mu: "\\mu",
+      nu: "\\nu",
+      xi: "\\xi",
+      omicron: "\\omicron",
+      pi: "\\pi",
+      rho: "\\rho",
+      sigma: "\\sigma",
+      tau: "\\tau",
+      upsilon: "\\upsilon",
+      phi: "\\phi",
+      chi: "\\chi",
+      psi: "\\psi",
+      omega: "\\omega",
     }
-  });
-
+  }
   return emojis;
 }

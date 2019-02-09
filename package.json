@@ -1,7 +1,7 @@
 {
-  "name": "draft-js-emoji-plugin",
-  "version": "2.1.1",
-  "description": "Emoji Plugin for DraftJS",
+  "name": "draft-js-math-emoji-plugin",
+  "version": "0.0.8",
+  "description": "Math Emoji Plugin for DraftJS",
   "author": {
     "name": "Nik Graf",
     "email": "nik@nikgraf.com",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/etac1992/draft-js-emoji-plugin.git"
+    "url": "https://github.com/etac1992/draft-js-math-emoji-plugin.git"
   },
   "main": "lib/index.js",
   "keywords": [
@@ -32,18 +32,19 @@
   "license": "MIT",
   "dependencies": {
     "decorate-component-with-props": "^1.1.0",
+    "draft-js": "^0.10.5",
     "emojione": "^2.2.7",
     "find-with-regex": "^1.1.3",
     "immutable": "~3.7.4",
-    "prop-types": "^15.5.8",
+    "katex": "^0.10.0",
     "lodash.keys": "^4.2.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
     "react-custom-scrollbars": "^4.2.0",
+    "react-dom": "^15.5.4",
     "react-icons": "^2.2.6",
     "to-style": "^1.3.3",
-    "union-class-names": "^1.0.0",
-    "draft-js": "^0.10.5",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "union-class-names": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
@@ -51,11 +52,9 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
-
     "css-loader": "^0.26.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "postcss-loader": "^1.3.3",
-
     "rimraf": "^2.6.1",
     "style-loader": "^0.13.2",
     "webpack": "^2.2.1"

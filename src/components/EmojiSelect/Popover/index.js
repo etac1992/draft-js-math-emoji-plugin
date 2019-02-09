@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import addEmoji from '../../../modifiers/addEmoji';
+import insertTeX from '../../../modifiers/insertTeX';
 import Groups from './Groups';
 import Nav from './Nav';
 import ToneSelect from './ToneSelect';
@@ -59,11 +59,9 @@ export default class Popover extends Component {
   onWheel = (e) => e.preventDefault();
 
   onEmojiSelect = (emoji) => {
-    const newEditorState = addEmoji(
-      this.props.store.getEditorState(),
-      emoji,
-    );
-    this.props.store.setEditorState(newEditorState);
+    const { store } = this.props;
+    const editorState = store.getEditorState();
+    store.setEditorState(insertTeX(editorState, emoji))
   };
 
   onEmojiMouseDown = (emojiEntry, toneSet) => {
@@ -174,7 +172,6 @@ export default class Popover extends Component {
       theme.emojiSelectPopover :
       theme.emojiSelectPopoverClosed;
     const { activeGroup } = this.state;
-
     return (
       <div
         className={className}

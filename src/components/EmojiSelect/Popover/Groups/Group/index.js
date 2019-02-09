@@ -53,11 +53,11 @@ export default class Group extends Component {
 
     return Object.keys(categoryEmojis).map((key) => (
       <li
-        key={categoryEmojis[key][0]}
+        key={categoryEmojis[key]}
         className={theme.emojiSelectPopoverGroupItem}
       >
         {isActive && <Entry
-          emoji={categoryEmojis[key][0]}
+          emoji={categoryEmojis[key]}
           theme={theme}
           imagePath={imagePath}
           imageType={imageType}
