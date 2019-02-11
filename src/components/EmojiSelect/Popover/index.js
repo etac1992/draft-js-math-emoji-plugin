@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import insertTeX from '../../../modifiers/insertTeX';
 import Groups from './Groups';
-import Nav from './Nav';
 import ToneSelect from './ToneSelect';
+import insertTeX from '../../../modifiers/insertTeX';
 
 export default class Popover extends Component {
   static propTypes = {
@@ -196,12 +195,6 @@ export default class Popover extends Component {
           ref={(element) => { this.groups = element; }}
           useNativeArt={useNativeArt}
           isOpen={isOpen}
-        />
-        <Nav
-          theme={theme}
-          groups={groups}
-          activeGroup={activeGroup}
-          onGroupSelect={this.onGroupSelect}
         />
         {this.renderToneSelect()}
       </div>

@@ -1,21 +1,9 @@
-import { Map, List } from 'immutable';
+import { Map } from 'immutable';
 
-import keys from 'lodash.keys';
 import decorateComponentWithProps from 'decorate-component-with-props';
-import { EditorState } from 'draft-js';
-import Emoji from './components/Emoji';
-import EmojiSuggestions from './components/EmojiSuggestions';
-import EmojiSuggestionsPortal from './components/EmojiSuggestionsPortal';
 import EmojiSelect from './components/EmojiSelect';
-import emojiStrategy from './emojiStrategy';
-import emojiSuggestionsStrategy from './emojiSuggestionsStrategy';
 import emojiStyles from './emojiStyles.css';
-import emojiSuggestionsStyles from './emojiSuggestionsStyles.css';
-import emojiSuggestionsEntryStyles from './emojiSuggestionsEntryStyles.css';
 import emojiSelectStyles from './emojiSelectStyles.css';
-import attachImmutableEntitiesToEmojis from './modifiers/attachImmutableEntitiesToEmojis';
-import defaultPositionSuggestions from './utils/positionSuggestions';
-import emojiList from './utils/emojiList';
 
 const defaultImagePath = '//cdn.jsdelivr.net/emojione/assets/svg/';
 const defaultImageType = 'svg';
@@ -26,13 +14,6 @@ const defaultCacheBustParam = '?v=2.2.7';
 export default (config = {}) => {
   const defaultTheme = {
     emoji: emojiStyles.emoji,
-
-    emojiSuggestions: emojiSuggestionsStyles.emojiSuggestions,
-
-    emojiSuggestionsEntry: emojiSuggestionsEntryStyles.emojiSuggestionsEntry,
-    emojiSuggestionsEntryFocused: emojiSuggestionsEntryStyles.emojiSuggestionsEntryFocused,
-    emojiSuggestionsEntryText: emojiSuggestionsEntryStyles.emojiSuggestionsEntryText,
-    emojiSuggestionsEntryIcon: emojiSuggestionsEntryStyles.emojiSuggestionsEntryIcon,
 
     emojiSelect: emojiSelectStyles.emojiSelect,
 
@@ -65,18 +46,6 @@ export default (config = {}) => {
     emojiSelectPopoverScrollbar: emojiSelectStyles.emojiSelectPopoverScrollbar,
     emojiSelectPopoverScrollbarThumb: emojiSelectStyles.emojiSelectPopoverScrollbarThumb,
   };
-
-  const callbacks = {
-    keyBindingFn: undefined,
-    handleKeyCommand: undefined,
-    onDownArrow: undefined,
-    onUpArrow: undefined,
-    onTab: undefined,
-    onEscape: undefined,
-    handleReturn: undefined,
-    onChange: undefined,
-  };
-
   const ariaProps = {
     ariaHasPopup: 'false',
     ariaExpanded: false,
@@ -127,8 +96,6 @@ export default (config = {}) => {
     imagePath = defaultImagePath,
     imageType = defaultImageType,
     allowImageCache,
-    positionSuggestions = defaultPositionSuggestions,
-    priorityList,
     selectGroups,
     selectButtonContent,
     toneSelectOpenDelay,
@@ -137,20 +104,6 @@ export default (config = {}) => {
 
   const cacheBustParam = allowImageCache ? '' : defaultCacheBustParam;
 
-  // if priorityList is configured in config then set priorityList
-  if (priorityList) emojiList.setPriorityList(priorityList);
-  const suggestionsProps = {
-    ariaProps,
-    cacheBustParam,
-    callbacks,
-    imagePath,
-    imageType,
-    theme,
-    store,
-    positionSuggestions,
-    shortNames: List(keys(emojiList.list)),
-    useNativeArt,
-  };
   const selectProps = {
     cacheBustParam,
     imagePath,
@@ -163,18 +116,7 @@ export default (config = {}) => {
     useNativeArt,
   };
   return {
-    EmojiSuggestions: decorateComponentWithProps(EmojiSuggestions, suggestionsProps),
     EmojiSelect: decorateComponentWithProps(EmojiSelect, selectProps),
-    decorators: [
-      {
-        strategy: emojiStrategy,
-        component: decorateComponentWithProps(Emoji, { theme, imagePath, imageType, cacheBustParam, useNativeArt }),
-      },
-      {
-        strategy: emojiSuggestionsStrategy,
-        component: decorateComponentWithProps(EmojiSuggestionsPortal, { store }),
-      },
-    ],
     getAccessibilityProps: () => (
       {
         role: 'combobox',
@@ -189,29 +131,6 @@ export default (config = {}) => {
     initialize: ({ getEditorState, setEditorState }) => {
       store.getEditorState = getEditorState;
       store.setEditorState = setEditorState;
-    },
-
-    onDownArrow: (keyboardEvent) => callbacks.onDownArrow && callbacks.onDownArrow(keyboardEvent),
-    onTab: (keyboardEvent) => callbacks.onTab && callbacks.onTab(keyboardEvent),
-    onUpArrow: (keyboardEvent) => callbacks.onUpArrow && callbacks.onUpArrow(keyboardEvent),
-    onEscape: (keyboardEvent) => callbacks.onEscape && callbacks.onEscape(keyboardEvent),
-    handleReturn: (keyboardEvent) => callbacks.handleReturn && callbacks.handleReturn(keyboardEvent),
-    onChange: (editorState) => {
-      let newEditorState = attachImmutableEntitiesToEmojis(editorState);
-
-      if (!newEditorState.getCurrentContent().equals(editorState.getCurrentContent())) {
-        // Forcing the current selection ensures that it will be at it's right place.
-        // This solves the issue where inserting an Emoji on OSX with Apple's Emoji
-        // selector led to the right selection the data, but wrong position in
-        // the contenteditable.
-        newEditorState = EditorState.forceSelection(
-          newEditorState,
-          newEditorState.getSelection(),
-        );
-      }
-
-      if (callbacks.onChange) return callbacks.onChange(newEditorState);
-      return newEditorState;
     },
   };
 };

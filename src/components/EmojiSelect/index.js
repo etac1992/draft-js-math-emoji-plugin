@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import strategy from 'emojione/emoji.json';
 import createEmojisFromStrategy from '../../utils/createEmojisFromStrategy';
 import defaultEmojiGroups from '../../constants/defaultEmojiGroups';
 import Popover from './Popover';
 
-const emojis = createEmojisFromStrategy(strategy);
+const emojis = createEmojisFromStrategy();
 
 export default class EmojiSelect extends Component {
   static propTypes = {

@@ -1,5 +1,5 @@
 /* Idea from https://github.com/tommoor/emojione-picker */
-export default function createEmojisFromStrategy(strategy) {
+export default function createEmojisFromStrategy() {
   const emojis = {
     greek: {
       Alpha: "A",
