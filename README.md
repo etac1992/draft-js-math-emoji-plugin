@@ -2,12 +2,12 @@
 
 *This is a plugin for the `draft-js-plugins-editor`.*
 
-This plugin provides consistent Emoji display across all platforms, independent of the host system.
+This plugin provides Math Emoji display across all platforms, independent of the host system.
 
 ## Usage
 
 ```js
-import createEmojiPlugin from 'draft-js-mth-emoji-plugin';
+import createEmojiPlugin from 'draft-js-math-emoji-plugin';
 
 const emojiPlugin = createEmojiPlugin();
 ```
