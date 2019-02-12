@@ -86,8 +86,8 @@ export default class Groups extends Component {
   isRenderedGroupActive = (index) => {
     const { activeGroup } = this.state;
     const { isOpen } = this.props;
-    return activeGroup === index ||
-           (isOpen && activeGroup + 1 === index); // we also preload next group when popup is open
+    return activeGroup === index
+           || (isOpen && activeGroup + 1 === index); // we also preload next group when popup is open
   }
 
   render() {
@@ -138,7 +138,6 @@ export default class Groups extends Component {
                 group.instance = element; // eslint-disable-line no-param-reassign
               }}
               useNativeArt={useNativeArt}
-              isActive={this.isRenderedGroupActive(index)}
             />
           ))}
         </Scrollbars>

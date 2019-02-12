@@ -15,24 +15,18 @@ export default class EmojiSelect extends Component {
     store: PropTypes.object.isRequired,
     selectGroups: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string.isRequired,
-      icon: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.string,
-      ]).isRequired,
       categories: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(emojis))).isRequired,
     })),
     selectButtonContent: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.string,
     ]),
-    toneSelectOpenDelay: PropTypes.number,
     useNativeArt: PropTypes.bool,
   };
 
   static defaultProps = {
     selectButtonContent: '☺',
     selectGroups: defaultEmojiGroups,
-    toneSelectOpenDelay: 500,
   };
 
   // Start the selector closed
@@ -86,12 +80,11 @@ export default class EmojiSelect extends Component {
       store,
       selectGroups,
       selectButtonContent,
-      toneSelectOpenDelay,
       useNativeArt,
     } = this.props;
-    const buttonClassName = this.state.isOpen ?
-      theme.emojiSelectButtonPressed :
-      theme.emojiSelectButton;
+    const buttonClassName = this.state.isOpen
+      ? theme.emojiSelectButtonPressed
+      : theme.emojiSelectButton;
 
     return (
       <div className={theme.emojiSelect} onClick={this.onClick}>
@@ -110,7 +103,6 @@ export default class EmojiSelect extends Component {
           store={store}
           groups={selectGroups}
           emojis={emojis}
-          toneSelectOpenDelay={toneSelectOpenDelay}
           isOpen={this.state.isOpen}
           useNativeArt={useNativeArt}
         />

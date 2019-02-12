@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Groups from './Groups';
-import ToneSelect from './ToneSelect';
 import insertTeX from '../../../modifiers/insertTeX';
 
 export default class Popover extends Component {
@@ -13,7 +12,6 @@ export default class Popover extends Component {
     store: PropTypes.object.isRequired,
     groups: PropTypes.arrayOf(PropTypes.object).isRequired,
     emojis: PropTypes.object.isRequired,
-    toneSelectOpenDelay: PropTypes.number.isRequired,
     isOpen: PropTypes.bool,
     useNativeArt: PropTypes.bool,
   };
@@ -24,7 +22,6 @@ export default class Popover extends Component {
 
   state = {
     activeGroup: 0,
-    showToneSelect: false,
   };
 
   componentDidMount() {
@@ -45,13 +42,6 @@ export default class Popover extends Component {
     if (this.activeEmoji) {
       this.activeEmoji.deselect();
       this.activeEmoji = null;
-
-      if (this.state.showToneSelect) {
-        this.closeToneSelect();
-      } else if (this.toneSelectTimer) {
-        clearTimeout(this.toneSelectTimer);
-        this.toneSelectTimer = null;
-      }
     }
   };
 
@@ -60,15 +50,11 @@ export default class Popover extends Component {
   onEmojiSelect = (emoji) => {
     const { store } = this.props;
     const editorState = store.getEditorState();
-    store.setEditorState(insertTeX(editorState, emoji))
+    store.setEditorState(insertTeX(editorState, emoji));
   };
 
-  onEmojiMouseDown = (emojiEntry, toneSet) => {
+  onEmojiMouseDown = (emojiEntry) => {
     this.activeEmoji = emojiEntry;
-
-    if (toneSet) {
-      this.openToneSelectWithTimer(toneSet);
-    }
   };
 
   onGroupSelect = (groupIndex) => {
@@ -83,78 +69,11 @@ export default class Popover extends Component {
     }
   };
 
-  openToneSelectWithTimer = (toneSet) => {
-    this.toneSelectTimer = setTimeout(() => {
-      this.toneSelectTimer = null;
-      this.openToneSelect(toneSet);
-    }, this.props.toneSelectOpenDelay);
-  }
-
-  openToneSelect = (toneSet) => {
-    this.toneSet = toneSet;
-
-    this.setState({
-      showToneSelect: true,
-    });
-  };
-
-  closeToneSelect = () => {
-    this.toneSet = [];
-
-    this.setState({
-      showToneSelect: false,
-    });
-  };
-
   checkMouseDown = () => this.mouseDown;
 
   mouseDown = false;
+
   activeEmoji = null;
-  toneSet = [];
-  toneSelectTimer = null;
-
-  renderToneSelect = () => {
-    if (this.state.showToneSelect) {
-      const { cacheBustParam, imagePath, imageType, theme = {} } = this.props;
-
-      const containerBounds = this.container.getBoundingClientRect();
-      const areaBounds = this.groups.container.getBoundingClientRect();
-      const entryBounds = this.activeEmoji.button.getBoundingClientRect();
-      // Translate TextRectangle coords to CSS relative coords
-      const bounds = {
-        areaBounds: {
-          left: areaBounds.left - containerBounds.left,
-          right: containerBounds.right - areaBounds.right,
-          top: areaBounds.top - containerBounds.top,
-          bottom: containerBounds.bottom - areaBounds.bottom,
-          width: areaBounds.width,
-          height: areaBounds.width,
-        },
-        entryBounds: {
-          left: entryBounds.left - containerBounds.left,
-          right: containerBounds.right - entryBounds.right,
-          top: entryBounds.top - containerBounds.top,
-          bottom: containerBounds.bottom - entryBounds.bottom,
-          width: entryBounds.width,
-          height: entryBounds.width,
-        }
-      };
-
-      return (
-        <ToneSelect
-          theme={theme}
-          bounds={bounds}
-          toneSet={this.toneSet}
-          imagePath={imagePath}
-          imageType={imageType}
-          cacheBustParam={cacheBustParam}
-          onEmojiSelect={this.onEmojiSelect}
-        />
-      );
-    }
-
-    return null;
-  };
 
   render() {
     const {
@@ -167,9 +86,9 @@ export default class Popover extends Component {
       isOpen = false,
       useNativeArt,
     } = this.props;
-    const className = isOpen ?
-      theme.emojiSelectPopover :
-      theme.emojiSelectPopoverClosed;
+    const className = isOpen
+      ? theme.emojiSelectPopover
+      : theme.emojiSelectPopoverClosed;
     const { activeGroup } = this.state;
     return (
       <div
@@ -196,7 +115,6 @@ export default class Popover extends Component {
           useNativeArt={useNativeArt}
           isOpen={isOpen}
         />
-        {this.renderToneSelect()}
       </div>
     );
   }

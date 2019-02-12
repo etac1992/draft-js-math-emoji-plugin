@@ -30,18 +30,9 @@ export default (config = {}) => {
     emojiSelectPopoverGroupList: emojiSelectStyles.emojiSelectPopoverGroupList,
     emojiSelectPopoverGroupItem: emojiSelectStyles.emojiSelectPopoverGroupItem,
 
-    emojiSelectPopoverToneSelect: emojiSelectStyles.emojiSelectPopoverToneSelect,
-    emojiSelectPopoverToneSelectList: emojiSelectStyles.emojiSelectPopoverToneSelectList,
-    emojiSelectPopoverToneSelectItem: emojiSelectStyles.emojiSelectPopoverToneSelectItem,
-
     emojiSelectPopoverEntry: emojiSelectStyles.emojiSelectPopoverEntry,
     emojiSelectPopoverEntryFocused: emojiSelectStyles.emojiSelectPopoverEntryFocused,
-    emojiSelectPopoverEntryIcon: emojiSelectStyles.emojiSelectPopoverEntryIcon,
 
-    emojiSelectPopoverNav: emojiSelectStyles.emojiSelectPopoverNav,
-    emojiSelectPopoverNavItem: emojiSelectStyles.emojiSelectPopoverNavItem,
-    emojiSelectPopoverNavEntry: emojiSelectStyles.emojiSelectPopoverNavEntry,
-    emojiSelectPopoverNavEntryActive: emojiSelectStyles.emojiSelectPopoverNavEntryActive,
 
     emojiSelectPopoverScrollbar: emojiSelectStyles.emojiSelectPopoverScrollbar,
     emojiSelectPopoverScrollbarThumb: emojiSelectStyles.emojiSelectPopoverScrollbarThumb,
@@ -98,7 +89,6 @@ export default (config = {}) => {
     allowImageCache,
     selectGroups,
     selectButtonContent,
-    toneSelectOpenDelay,
     useNativeArt,
   } = config;
 
@@ -112,7 +102,6 @@ export default (config = {}) => {
     store,
     selectGroups,
     selectButtonContent,
-    toneSelectOpenDelay,
     useNativeArt,
   };
   return {

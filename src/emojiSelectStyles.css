@@ -96,36 +96,6 @@
   height: 2.5em;
 }
 
-.emojiSelectPopoverToneSelect {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-}
-
-.emojiSelectPopoverToneSelectList {
-  margin: .3em;
-  padding: .3em;
-  position: absolute;
-  display: flex;
-  list-style: none;
-  border: 1px solid #e0e0e0;
-  border-radius: .5em;
-  background: #fff;
-  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.1);
-}
-
-.emojiSelectPopoverToneSelectItem {
-  width: 2.5em;
-  height: 2.5em;
-}
-
-.emojiSelectPopoverToneSelectItem:first-child {
-  border-right: 1px solid #e0e0e0;
-}
-
 .emojiSelectPopoverEntry, .emojiSelectPopoverEntryFocused {
   padding: 0;
   width: 100%;
@@ -138,40 +108,6 @@
 
 .emojiSelectPopoverEntryFocused {
   background-color: #efefef;
-}
-
-.emojiSelectPopoverEntryIcon {
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: middle;
-}
-
-.emojiSelectPopoverNav {
-  margin: 0;
-  padding: 0 .5em;
-  display: flex;
-  width: 20em;
-  list-style: none;
-}
-
-.emojiSelectPopoverNavItem {
-  width: 2.5em;
-  height: 2.5em;
-}
-
-.emojiSelectPopoverNavEntry, .emojiSelectPopoverNavEntryActive {
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-size: 1.2em;
-  color: #bdbdbd;
-  background: none;
-  border: none;
-  outline: none;
-}
-
-.emojiSelectPopoverNavEntryActive {
-  color: #42a5f5;
 }
 
 .emojiSelectPopoverScrollbar {
