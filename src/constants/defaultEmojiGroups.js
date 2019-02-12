@@ -3,13 +3,10 @@ const defaultEmojiGroups = [{
   categories: ['greek'],
 }, {
   title: 'Factor Prefixes',
-  categories: ['greek'],
+  categories: ['factor'],
 }, {
   title: 'Constants',
-  categories: ['greek'],
-}, {
-  title: 'Formulae',
-  categories: ['greek'],
+  categories: ['constants'],
 }];
 
 export default defaultEmojiGroups;

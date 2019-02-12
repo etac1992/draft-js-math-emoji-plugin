@@ -7,26 +7,14 @@ This plugin provides consistent Emoji display across all platforms, independent 
 ## Usage
 
 ```js
-import createEmojiPlugin from 'draft-js-emoji-plugin';
+import createEmojiPlugin from 'draft-js-mth-emoji-plugin';
 
 const emojiPlugin = createEmojiPlugin();
-```
-## Advanced Usage
-
-```js
-const emojiPlugin = createEmojiPlugin({
-  priorityList: {
-    ':see_no_evil:': ["1f648"],
-    ':raised_hands:': ["1f64c"],
-    ':100:': ["1f4af"],
-  }
-});
-// emojis in priorityList will show up after user typed ':'
 ```
 ## Importing the default styles
 
 The plugin ships with a default styling available at this location in the installed package:
-`node_modules/draft-js-emoji-plugin/lib/plugin.css`.
+`node_modules/draft-js-math-emoji-plugin/lib/plugin.css`.
 
 ### Webpack Usage
 
@@ -49,6 +37,6 @@ Follow the below steps to import the css file by using Webpack's `style-loader` 
 3. Add the below import line to your component to tell Webpack to inject style to your component.
 
     ```js
-    import 'draft-js-emoji-plugin/lib/plugin.css';
+    import 'draft-js-math-emoji-plugin/lib/plugin.css';
     ```
 4. Restart Webpack.

@@ -1,6 +1,6 @@
 {
   "name": "draft-js-math-emoji-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Math Emoji Plugin for DraftJS",
   "author": {
     "name": "Nik Graf",
@@ -36,7 +36,6 @@
     "find-with-regex": "^1.1.3",
     "immutable": "~3.7.4",
     "katex": "^0.10.0",
-    "lodash.keys": "^4.2.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-custom-scrollbars": "^4.2.0",
