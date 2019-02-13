@@ -2,6 +2,7 @@ import {
   Modifier,
   EditorState,
 } from 'draft-js';
+import { isAtEndOfBlock } from './utils';
 
 export default function insertTeX(editorState, initialValue) {
   let contentState = editorState.getCurrentContent();
@@ -35,12 +36,25 @@ export default function insertTeX(editorState, initialValue) {
     'IMMUTABLE',
     {
       teX,
+      displaystyle: false,
     },
   );
   const entityKey = contentState.getLastCreatedEntityKey();
 
   // insérer un espace si le curseur se trouve au début ou à la fin
   // d'un bloc
+  const atBeginOfBlock = selection.getStartOffset() === 0;
+  const atEndOfBlock = isAtEndOfBlock(contentState, selection);
+
+  if (atBeginOfBlock) {
+    contentState = Modifier.insertText(
+      contentState,
+      selection,
+      ' ',
+    );
+    selection = contentState.getSelectionAfter();
+  }
+
   contentState = Modifier.insertText(
     contentState,
     selection,
@@ -50,9 +64,18 @@ export default function insertTeX(editorState, initialValue) {
   );
   selection = contentState.getSelectionAfter();
 
+  if (atEndOfBlock) {
+    contentState = Modifier.insertText(
+      contentState,
+      selection,
+      ' ',
+    );
+  }
+
   return EditorState.push(
-    editorState,
-    contentState,
-    'apply-entity',
-  );
+      editorState,
+      contentState,
+      'apply-entity',
+    );
 }
+
