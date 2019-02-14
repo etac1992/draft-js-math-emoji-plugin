@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import katex from 'katex';
 
 export default class Entry extends Component {
-  mouseDown = this.props.mouseDown;
 
   constructor(props) {
     super(props);
@@ -11,18 +9,6 @@ export default class Entry extends Component {
       isFocused: false,
     };
   }
-
-
-  componentDidMount() {
-    const { emoji } = this.props;
-    katex.render(emoji, this.button, {
-      displayMode: false,
-    });
-  }
-
-  deselect = () => {
-    this.setState({ isFocused: false });
-  };
 
   onMouseUp = () => {
     if (this.mouseDown) {
@@ -48,8 +34,13 @@ export default class Entry extends Component {
     }
   };
 
+  deselect = () => {
+    this.setState({ isFocused: false });
+  };
+
+  mouseDown = this.props.mouseDown;
   render() {
-    const { theme = {} } = this.props;
+    const { theme = {}, emoji } = this.props;
     const { isFocused } = this.state;
     return (
       <button
@@ -62,13 +53,14 @@ export default class Entry extends Component {
         onMouseLeave={this.onMouseLeave}
         onMouseUp={this.onMouseUp}
         ref={(element) => { this.button = element; }}
+        dangerouslySetInnerHTML={{ __html: emoji.html || emoji.text }}
       />
     );
   }
 }
 Entry.propTypes = {
   theme: PropTypes.object.isRequired,
-  emoji: PropTypes.string.isRequired,
+  emoji: PropTypes.object.isRequired,
   mouseDown: PropTypes.bool,
   checkMouseDown: PropTypes.func.isRequired,
   onEmojiSelect: PropTypes.func.isRequired,

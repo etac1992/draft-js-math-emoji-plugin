@@ -5,15 +5,11 @@ import insertTeX from '../../../modifiers/insertTeX';
 
 export default class Popover extends Component {
   static propTypes = {
-    cacheBustParam: PropTypes.string.isRequired,
-    imagePath: PropTypes.string.isRequired,
-    imageType: PropTypes.string.isRequired,
     theme: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
     groups: PropTypes.arrayOf(PropTypes.object).isRequired,
     emojis: PropTypes.object.isRequired,
     isOpen: PropTypes.bool,
-    useNativeArt: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -77,14 +73,10 @@ export default class Popover extends Component {
 
   render() {
     const {
-      cacheBustParam,
-      imagePath,
-      imageType,
       theme = {},
       groups = [],
       emojis,
       isOpen = false,
-      useNativeArt,
     } = this.props;
     const className = isOpen
       ? theme.emojiSelectPopover
@@ -104,15 +96,11 @@ export default class Popover extends Component {
           theme={theme}
           groups={groups}
           emojis={emojis}
-          imagePath={imagePath}
-          imageType={imageType}
-          cacheBustParam={cacheBustParam}
           checkMouseDown={this.checkMouseDown}
           onEmojiSelect={this.onEmojiSelect}
           onEmojiMouseDown={this.onEmojiMouseDown}
           onGroupScroll={this.onGroupScroll}
           ref={(element) => { this.groups = element; }}
-          useNativeArt={useNativeArt}
           isOpen={isOpen}
         />
       </div>

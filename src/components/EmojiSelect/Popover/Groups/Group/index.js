@@ -4,49 +4,37 @@ import Entry from '../../Entry';
 
 export default class Group extends Component {
   static propTypes = {
-    cacheBustParam: PropTypes.string.isRequired,
-    imagePath: PropTypes.string.isRequired,
-    imageType: PropTypes.string.isRequired,
     theme: PropTypes.object.isRequired,
     group: PropTypes.object.isRequired,
     emojis: PropTypes.object.isRequired,
     checkMouseDown: PropTypes.func.isRequired,
     onEmojiSelect: PropTypes.func.isRequired,
     onEmojiMouseDown: PropTypes.func.isRequired,
-    useNativeArt: PropTypes.bool,
   };
 
   renderCategory = (category) => {
     const {
-      cacheBustParam,
-      imagePath,
-      imageType,
       theme = {},
       emojis,
       checkMouseDown,
       onEmojiSelect,
       onEmojiMouseDown,
-      useNativeArt,
     } = this.props;
 
     const categoryEmojis = emojis[category];
 
     return Object.keys(categoryEmojis).map((key) => (
       <li
-        key={categoryEmojis[key]}
+        key={key.text}
         className={theme.emojiSelectPopoverGroupItem}
       >
         <Entry
           emoji={categoryEmojis[key]}
           theme={theme}
-          imagePath={imagePath}
-          imageType={imageType}
-          cacheBustParam={cacheBustParam}
           toneSet={categoryEmojis[key].length > 1 ? categoryEmojis[key] : null}
           checkMouseDown={checkMouseDown}
           onEmojiSelect={onEmojiSelect}
           onEmojiMouseDown={onEmojiMouseDown}
-          useNativeArt={useNativeArt}
         />
       </li>
     ));
